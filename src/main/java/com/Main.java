@@ -13,6 +13,8 @@ public class Main {
 
          int lastId = 0;
 
+        WiseSaying wiseSaying = null;
+
         while (true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine().trim();
@@ -20,6 +22,19 @@ public class Main {
             if (cmd.equals("종료")) {
                 break;
             }
+            else if (cmd.equals("목록")) {
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("----------------------");
+
+                if (wiseSaying == null) continue; //nullpointException 상황을 방지하기 위해 continue 사용
+
+                System.out.println("%d / %s / %s".formatted(
+                        wiseSaying.id,
+                        wiseSaying.content,
+                        wiseSaying.author
+                ));
+            }
+
             else if (cmd.equals("등록")) {
                 System.out.println("명언: ");
                 String wiseSayingContent = scanner.nextLine().trim();
@@ -28,14 +43,10 @@ public class Main {
 
                 int id = ++lastId;
 
-                WiseSaying wiseSaying = new WiseSaying();
+                wiseSaying = new WiseSaying();
                 wiseSaying.id = id;
                 wiseSaying.content = wiseSayingContent;
                 wiseSaying.author = wiseSayingAuthor;
-
-                System.out.println("wiseSaying.id : %s".formatted(wiseSaying.id));
-                System.out.println("wiseSaying.content : %s".formatted(wiseSaying.content));
-                System.out.println("wiseSaying.author : %s".formatted(wiseSaying.author));
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             }
