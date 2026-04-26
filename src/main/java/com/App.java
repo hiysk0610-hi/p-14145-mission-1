@@ -20,9 +20,12 @@ public class App {
                 actionList();
             } else if (cmd.equals("등록")) {
                 actionWrite();
+            } else if (cmd.equals("삭제?id=1")) {
+                actionDelete(1);
+            } else if (cmd.equals("삭제?id=2")) {
+                actionDelete(2);
             }
         }
-        scanner.close();
     }
 
     void actionList() {
@@ -47,16 +50,22 @@ public class App {
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.id));
     }
 
+    void actionDelete(int id) {
+        delete(id);
+
+        System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
+    }
+
     int getSize() {
         return wiseSayingLastIndex + 1; //현재 명언이 몇개인지
     }
 
-    WiseSaying[] findForList(){
-        WiseSaying[]  forListWiseSaying = new WiseSaying[wiseSayingLastIndex + 1];
+    WiseSaying[] findForList() {
+        WiseSaying[] forListWiseSaying = new WiseSaying[wiseSayingLastIndex + 1];
 
         int forListWiseSayingIndex = -1;
 
-        for (int i = wiseSayingLastIndex; i >=0; i--) {
+        for (int i = wiseSayingLastIndex; i >= 0; i--) {
             forListWiseSaying[++forListWiseSayingIndex] = wiseSayings[i];
         }
         return forListWiseSaying;
@@ -72,8 +81,27 @@ public class App {
 
         return wiseSaying;
     }
-}
 
+    void delete(int id) {
+        int deleteIndex = -1;
+
+        for( int i =0; i <= wiseSayingLastIndex; i++) {
+            if (wiseSayings[i].id == id) {
+                deleteIndex = i;
+                break;
+
+            }
+        }
+        if (deleteIndex == -1) return;
+
+        for (int i = deleteIndex + 1; i <= wiseSayingLastIndex; i++) {
+            wiseSayings[i - 1] = wiseSayings[i];
+        }
+
+        wiseSayings[wiseSayingLastIndex] = null;
+        wiseSayingLastIndex--;
+    }
+}
 
 
 
