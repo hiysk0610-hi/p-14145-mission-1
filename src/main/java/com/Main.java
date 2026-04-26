@@ -1,19 +1,19 @@
 package com;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("== 명언 앱 ==");
 
         Scanner scanner = new Scanner(System.in);
 
          int lastId = 0;
 
-        WiseSaying wiseSaying = null;
+        WiseSaying[] wiseSayings = new WiseSaying[100];
+        int wiseSayingLastIndex = -1; //가장 마지막에쓴게 -1이다. 그러면 0부터 사용 가능
 
         while (true) {
             System.out.print("명령) ");
@@ -26,13 +26,12 @@ public class Main {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                if (wiseSaying == null) continue; //nullpointException 상황을 방지하기 위해 continue 사용
+                for (int i = wiseSayingLastIndex; i >=0 ; i--) {
+                    WiseSaying wiseSaying = wiseSayings[i];
 
-                System.out.println("%d / %s / %s".formatted(
-                        wiseSaying.id,
-                        wiseSaying.content,
-                        wiseSaying.author
-                ));
+                    System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
+                }
+
             }
 
             else if (cmd.equals("등록")) {
@@ -43,10 +42,11 @@ public class Main {
 
                 int id = ++lastId;
 
-                wiseSaying = new WiseSaying();
+                WiseSaying wiseSaying = new WiseSaying();
                 wiseSaying.id = id;
                 wiseSaying.content = wiseSayingContent;
                 wiseSaying.author = wiseSayingAuthor;
+                wiseSayings[++wiseSayingLastIndex] = wiseSaying;
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             }
