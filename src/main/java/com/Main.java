@@ -28,8 +28,17 @@ public class Main {
 
                 int id = ++lastId;
 
+                WiseSaying wiseSaying = new WiseSaying();
+                wiseSaying.id = id;
+                wiseSaying.content = wiseSayingContent;
+                wiseSaying.author = wiseSayingAuthor;
+
+                System.out.println("wiseSaying.id : %s".formatted(wiseSaying.id));
+                System.out.println("wiseSaying.content : %s".formatted(wiseSaying.content));
+                System.out.println("wiseSaying.author : %s".formatted(wiseSaying.author));
+
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
-            } //%d : 디지털 , .formatted(id) : 괄호 안(id)의 값이 %d로 치환되서 문자열 완성
+            }
         }
         scanner.close();
     }
