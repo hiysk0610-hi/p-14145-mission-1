@@ -11,6 +11,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+         int lastId = 0;
+
         while (true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine().trim();
@@ -23,8 +25,11 @@ public class Main {
                 String wiseSayingContent = scanner.nextLine().trim();
                 System.out.println("작가: ");
                 String wiseSayingAuthor = scanner.nextLine().trim();
-                System.out.println("1번 명언이 등록되었습니다.");
-            }
+
+                int id = ++lastId;
+
+                System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
+            } //%d : 디지털 , .formatted(id) : 괄호 안(id)의 값이 %d로 치환되서 문자열 완성
         }
         scanner.close();
     }
